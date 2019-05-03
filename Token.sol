@@ -11,7 +11,7 @@ import "http://github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC
   * @title name is Goodcash
   * @title symbol is GCASH
   */  
-contract Goodcash is ERC20, ERC20Detailed, Ownable{  
+contract GoodcashToken is ERC20, ERC20Detailed, Ownable{  
 
   uint256 public initialSupply  = 125000000000000000000000000; 
   /**  
