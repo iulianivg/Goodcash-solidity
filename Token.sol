@@ -1,8 +1,8 @@
 pragma solidity ^0.5.2;  
 
-import "http://github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
-import "http://github.com/OpenZeppelin/openzeppelin-solidity/contracts/ownership/Ownable.sol";
-import "http://github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
+import "./OpenZeppelin/contracts/token/ERC20/ERC20.sol";
+import "./OpenZeppelin/contracts/ownership/Ownable.sol";
+import "./OpenZeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 
   /**  
   * @title Goodcash is ERC20
