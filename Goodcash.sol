@@ -77,7 +77,7 @@ contract Goodcash{
 
  function removeDecimal(bytes symbol_) public onlyOwner returns(bool){
  require(tokensDecimals[symbol_]!=0x0);
- delete(tokensDecimals[symbol_]!=0x0);
+ delete(tokensDecimals[symbol_]);
  return true;
  }
  
