@@ -162,6 +162,13 @@ contract Goodcash{
  function returnSymbol(bytes memory symbol_)public view returns(address){
     return(tokens[symbol_]);
  }
+ function returnBurnAddress(bytes memory symbol_) public view returns(address){
+    return(tokensBurn[symbol_]);
+ }
+ function returnDecimals(bytes memory symbol_) public view returns(address){
+    return(tokensDecimals[symbol_]);
+ }
+ 
  //// function such that we can assign the contract address of our coin to a variable.
  function forContract(address address_) public onlyOwner{
      tokenContract = address_;
