@@ -76,6 +76,20 @@ contract Goodcash{
  return true;
  }
  
+ function removeEverything(bytes symbol_) public onlyOwner returns(bool){
+ require(tokensDecimals[symbol_]!=0x0);
+ require(tokensBurn[symbol_]!=0x0);
+ require(tokensPrice[symbol_]!=0x0);
+ require(tokens[symbol_]!=0x0);
+ 
+ delete(tokensDecimals[symbol_]);
+ delete(tokensBurn[symbol_]);
+ delete(tokensPrice[symbol_]);
+ delete(tokens[symbol_]);
+ return true;
+ 
+ }
+ 
  function returnPrice(bytes symbol_) public view returns(uint256){
      return(tokensPrice[symbol_]);
  }
