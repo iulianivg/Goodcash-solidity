@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.8;
 
 interface IERC20 {
     function totalSupply() external view returns (uint256);
@@ -41,51 +41,51 @@ contract Goodcash{
  pause = _state;
  }
  
- function addNewToken(bytes symbol_, address address_) public onlyOwner returns(bool){
+ function addNewToken(bytes memory symbol_, address address_) public onlyOwner returns(bool){
     tokens[symbol_] = address_;
 
     return true;
  }
- function addPrice(bytes symbol_, uint256 price_) public onlyOwner returns(bool){
+ function addPrice(bytes memory symbol_, uint256 price_) public onlyOwner returns(bool){
      tokensPrice[symbol_] = price_;
  }
- function addBurn(bytes symbol_, address address_) public onlyOwner returns(bool){
+ function addBurn(bytes memory symbol_, address address_) public onlyOwner returns(bool){
      tokensBurn[symbol_] = address_;
  }
  /// used when our cryptocurrency has 18 decimal points and the deadcoin has less
- function addDecimal(bytes symbol_, uint decimals) public onlyOwner returns(bool){
+ function addDecimal(bytes memory symbol_, uint decimals) public onlyOwner returns(bool){
      tokensDecimals[symbol_] = 10**uint(decimals);
  }
- function removePrice(bytes symbol_) public onlyOwner returns(bool){
+ function removePrice(bytes memory symbol_) public onlyOwner returns(bool){
      require(tokensPrice[symbol_] != 0x0);
      delete(tokensPrice[symbol_]);
      return true;
  }
- function removeToken(bytes symbol_) public onlyOwner returns(bool){
-    require(tokens[symbol_] != 0x0);
+ function removeToken(bytes memory symbol_) public onlyOwner returns(bool){
+    require(tokens[symbol_] != 0x0000000000000000000000000000000000000000);
 
     delete(tokens[symbol_]);
 
     return true;
  }
  
- function removeBurn(bytes symbol_) public onlyOwner returns(bool){
-   require(tokensBurn[symbol_] != 0x0);
+ function removeBurn(bytes memory symbol_) public onlyOwner returns(bool){
+   require(tokensBurn[symbol_] != 0x0000000000000000000000000000000000000000);
    delete(tokensBurn[symbol_]);
    return true;
  }
 
- function removeDecimal(bytes symbol_) public onlyOwner returns(bool){
+ function removeDecimal(bytes memory symbol_) public onlyOwner returns(bool){
  require(tokensDecimals[symbol_]!=0x0);
  delete(tokensDecimals[symbol_]);
  return true;
  }
  
- function removeEverything(bytes symbol_) public onlyOwner returns(bool){
+ function removeEverything(bytes memory symbol_) public onlyOwner returns(bool){
  require(tokensDecimals[symbol_]!=0x0);
- require(tokensBurn[symbol_]!=0x0);
+ require(tokensBurn[symbol_]!=0x0000000000000000000000000000000000000000);
  require(tokensPrice[symbol_]!=0x0);
- require(tokens[symbol_]!=0x0);
+ require(tokens[symbol_]!=0x0000000000000000000000000000000000000000);
  
  delete(tokensDecimals[symbol_]);
  delete(tokensBurn[symbol_]);
@@ -95,10 +95,10 @@ contract Goodcash{
  
  }
  
- function returnPrice(bytes symbol_) public view returns(uint256){
+ function returnPrice(bytes memory symbol_) public view returns(uint256){
      return(tokensPrice[symbol_]);
  }
- function returnSymbol(bytes symbol_)public view returns(address){
+ function returnSymbol(bytes memory symbol_)public view returns(address){
     return(tokens[symbol_]);
  }
  //// function such that we can assign the contract address of our coin to a variable.
@@ -107,9 +107,9 @@ contract Goodcash{
  }
  
  // main function to transfer tokens. Works if the user has approved this contract to burn their tokens
- function transferTokens(bytes symbol_, uint256 amount_) public {
-    require(pause == true);
-    require(tokens[symbol_]!= 0x0);
+ function transferTokens(bytes memory symbol_, uint256 amount_) public {
+    require(pause == false);
+    require(tokens[symbol_]!= 0x0000000000000000000000000000000000000000);
     require(amount_ > 0);
 
     address contract_ = tokens[symbol_];
