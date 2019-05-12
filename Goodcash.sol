@@ -23,6 +23,7 @@ contract Goodcash{
 
  address public owner;
  address public tokenContract;
+ bool public pause;
  
  mapping(bytes => address) tokens;
  mapping(bytes => uint256) tokensPrice;
@@ -34,6 +35,10 @@ contract Goodcash{
 
  constructor() public {
     owner = msg.sender;
+ }
+ 
+ function addPause(bool _state) public onlyOwner returns(bool){
+ pause = _state;
  }
  
  function addNewToken(bytes symbol_, address address_) public onlyOwner returns(bool){
@@ -103,6 +108,7 @@ contract Goodcash{
  
  // main function to transfer tokens. Works if the user has approved this contract to burn their tokens
  function transferTokens(bytes symbol_, uint256 amount_) public {
+    require(pause == true);
     require(tokens[symbol_]!= 0x0);
     require(amount_ > 0);
 
