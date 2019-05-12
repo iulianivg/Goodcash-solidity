@@ -24,10 +24,10 @@ contract Goodcash{
  address public owner;
  address public tokenContract;
  
- mapping(string => address) tokens;
- mapping(string => uint256) tokensPrice;
- mapping(string => address) tokensBurn;
- mapping(string => uint256) tokensDecimals;
+ mapping(bytes => address) tokens;
+ mapping(bytes => uint256) tokensPrice;
+ mapping(bytes => address) tokensBurn;
+ mapping(bytes => uint256) tokensDecimals;
  
  IERC20 public IERC20Interface;
  IERC20 public IERC20Interface2;
@@ -36,27 +36,27 @@ contract Goodcash{
     owner = msg.sender;
  }
  
- function addNewToken(string symbol_, address address_) public onlyOwner returns(bool){
+ function addNewToken(bytes symbol_, address address_) public onlyOwner returns(bool){
     tokens[symbol_] = address_;
 
     return true;
  }
- function addPrice(string symbol_, uint256 price_) public onlyOwner returns(bool){
+ function addPrice(bytes symbol_, uint256 price_) public onlyOwner returns(bool){
      tokensPrice[symbol_] = price_;
  }
- function addBurn(string symbol_, address address_) public onlyOwner returns(bool){
+ function addBurn(bytes symbol_, address address_) public onlyOwner returns(bool){
      tokensBurn[symbol_] = address_;
  }
  /// used when our cryptocurrency has 18 decimal points and the deadcoin has less
- function addDecimal(string symbol_, uint decimals) public onlyOwner returns(bool){
+ function addDecimal(bytes symbol_, uint decimals) public onlyOwner returns(bool){
      tokensDecimals[symbol_] = 10**uint(decimals);
  }
- function removePrice(string symbol_) public onlyOwner returns(bool){
+ function removePrice(bytes symbol_) public onlyOwner returns(bool){
      require(tokensPrice[symbol_] != 0x0);
      delete(tokensPrice[symbol_]);
      return true;
  }
- function removeToken(string symbol_) public onlyOwner returns(bool){
+ function removeToken(bytes symbol_) public onlyOwner returns(bool){
     require(tokens[symbol_] != 0x0);
 
     delete(tokens[symbol_]);
@@ -65,10 +65,10 @@ contract Goodcash{
  }
  /// we will create functions to remove burn address and remove decimal
  
- function returnPrice(string symbol_) public view returns(uint256){
+ function returnPrice(bytes symbol_) public view returns(uint256){
      return(tokensPrice[symbol_]);
  }
- function returnSymbol(string symbol_)public view returns(address){
+ function returnSymbol(bytes symbol_)public view returns(address){
     return(tokens[symbol_]);
  }
  //// function such that we can assign the contract address of our coin to a variable.
@@ -77,7 +77,7 @@ contract Goodcash{
  }
  
  // main function to transfer tokens. Works if the user has approved this contract to burn their tokens
- function transferTokens(string symbol_, uint256 amount_) public {
+ function transferTokens(bytes symbol_, uint256 amount_) public {
     require(tokens[symbol_]!= 0x0);
     require(amount_ > 0);
 
