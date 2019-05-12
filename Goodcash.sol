@@ -63,7 +63,18 @@ contract Goodcash{
 
     return true;
  }
- /// we will create functions to remove burn address and remove decimal
+ 
+ function removeBurn(bytes symbol_) public onlyOwner returns(bool){
+   require(tokensBurn[symbol_] != 0x0);
+   delete(tokensBurn[symbol_]);
+   return true;
+ }
+
+ function removeDecimal(bytes symbol_) public onlyOwner returns(bool){
+ require(tokensDecimals[symbol_]!=0x0);
+ delete(tokensDecimals[symbol_]!=0x0);
+ return true;
+ }
  
  function returnPrice(bytes symbol_) public view returns(uint256){
      return(tokensPrice[symbol_]);
