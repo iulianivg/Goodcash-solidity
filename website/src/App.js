@@ -37,6 +37,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    
     firebase.auth().onAuthStateChanged(user => {
       this.setState({isSignedIn:!!user})
     });
@@ -52,6 +53,7 @@ class App extends Component {
 
 
   }
+
 
   logOut = () => {
     firebase.auth().signOut();
@@ -77,9 +79,9 @@ class App extends Component {
         <div style={{textAlign:'center'}}>
         <h3 >Welcome to Goodcash, {firebase.auth().currentUser.displayName} :)</h3>
         <Button onClick={this.logOut} variant="outlined" color="primary">
+        
         Log out
         </Button>
-        {this.state.account}
         </div>
         {/* TO DO: to not display photo if user has logged in with email */}
         <hr />
@@ -96,12 +98,14 @@ class App extends Component {
         <Grid container spacing={24} style={{width:'100%'}}>
           <Grid item sm={12} xs={12}>
           <Badge color="secondary" badgeContent={"2500 GCASH"}>
+          <a href="/Logo-vote" style={{color:'black',textDecoration:'none'}} authenticated={{text:this.state.account}}>
         <Paper elevation={4} style={{width:'28rem'}}>
           <p>Vote your favourite logo</p>
           <Countdown date={'Mon, 10 Jun 2019 01:02:03'} renderer={this.renderer} >
         <p>Hey!!</p>
         </Countdown>
         </Paper>
+        </a>
         </Badge>
           </Grid>
 
