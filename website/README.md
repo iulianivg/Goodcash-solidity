@@ -1,3 +1,10 @@
+Goal:
+
+![Picture_1](https://user-images.githubusercontent.com/43420841/57787193-d3f7a780-772c-11e9-8fd0-5d009db32e3d.png)
+![Picture_3](https://user-images.githubusercontent.com/43420841/57787195-d3f7a780-772c-11e9-87b1-35a39f11a36a.png)
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 Clone the website directory, 
 CD into it,
