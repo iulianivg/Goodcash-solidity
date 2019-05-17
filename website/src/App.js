@@ -3,13 +3,14 @@ import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import Countdown from 'react-countdown-now';
 import {Grid, Paper, Badge, Button, Tooltip} from '@material-ui/core'
+import {Link} from 'react-router-dom';
 import './App.css';
-
 
 firebase.initializeApp({
   apiKey:"getfromfirebase",
   authDomain:"getfromfirebase",
   databaseURL: "getfromfirebase
+  storageBucket:"getfromfirebase"
 
 })
 
@@ -17,7 +18,7 @@ firebase.initializeApp({
 class App extends Component {
   state={
     isSignedIn:false,
-    account:'',
+    account:'hello',
   }
   uiConfig = {
     signInFlow: "popup",
@@ -72,12 +73,12 @@ class App extends Component {
   render(){
   return (
     <div className="App">
-    <h2 style={{textAlign:'center'}}>Goodcash</h2>
+    <h2 style={{textAlign:'center'}}>GoodCash</h2>
     
       {this.state.isSignedIn ?
       <div>
         <div style={{textAlign:'center'}}>
-        <h3 >Welcome to Goodcash, {firebase.auth().currentUser.displayName} :)</h3>
+        <h3 >Welcome to GoodCash, {firebase.auth().currentUser.displayName} :)</h3>
         <Button onClick={this.logOut} variant="outlined" color="primary">
         
         Log out
@@ -96,23 +97,29 @@ class App extends Component {
         <p>Vote your favorite blog post</p>
         </Paper> */}
         <Grid container spacing={24} style={{width:'100%'}}>
-          <Grid item sm={12} xs={12}>
+          <Grid item sm={12} xs={11}>
+          
+          <Link style={{color:'black',textDecoration:'none'}} to={{
+              pathname: '/Logo-vote',
+            }}>
+          {/* <a href="/Logo-vote" style={{color:'black',textDecoration:'none'}} authenticated={{text:this.state.account}}> */}
           <Badge color="secondary" badgeContent={"2500 GCASH"}>
-          <a href="/Logo-vote" style={{color:'black',textDecoration:'none'}} authenticated={{text:this.state.account}}>
-        <Paper elevation={4} style={{width:'28rem'}}>
+        <Paper elevation={4} >
           <p>Vote your favourite logo</p>
           <Countdown date={'Mon, 10 Jun 2019 01:02:03'} renderer={this.renderer} >
         <p>Hey!!</p>
         </Countdown>
         </Paper>
-        </a>
+        {/* </a> */}
         </Badge>
+        </Link>
+        
           </Grid>
 
 
-          <Grid item sm={12} xs={12}>
+          <Grid item sm={12} xs={11}>
           <Badge color="secondary" badgeContent={"1500 GCASH"}>
-        <Paper elevation={4} style={{width:'28rem'}}>
+        <Paper elevation={4} >
           <p>Vote your favourite tagline</p>
           <Countdown date={'Mon, 10 Jun 2019 01:02:03'} renderer={this.renderer} >
         <p>Hey!!</p>
@@ -122,22 +129,22 @@ class App extends Component {
           </Grid>
 
 
-          <Grid item sm={12} xs={12}>
+          <Grid item sm={12} xs={11}>
           <Badge color="secondary" badgeContent={"800 GCASH"}>
-        <Paper elevation={4} style={{width:'28rem'}}>
-          <p>Vote your favourite blog post</p>
-          <Countdown date={'Mon, 10 Jun 2019 01:02:03'} renderer={this.renderer} >
+        <Paper elevation={4} >
+          <p>Vote your favourite blog</p>
+          <Countdown date={'Tue, 11 Jun 2019 11:52:31'} renderer={this.renderer} >
         <p>Hey!!</p>
         </Countdown>
         </Paper>
         </Badge>
           </Grid>
 
-          <Grid item sm={12} xs={12}>
+          <Grid item sm={12} xs={11}>
           <Badge color="secondary" badgeContent={"42.0 GCASH"}>
-        <Paper elevation={4} style={{width:'28rem'}}>
+        <Paper elevation={4} >
           <p>Vote your favourite joke</p>
-          <Countdown date={'Mon, 10 Jun 2019 01:02:03'} renderer={this.renderer} >
+          <Countdown date={'Wed, 12 Jun 2019 03:11:43'} renderer={this.renderer} >
         <p>Hey!!</p>
         </Countdown>
         </Paper>

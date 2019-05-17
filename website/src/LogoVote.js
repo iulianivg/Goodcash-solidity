@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import firebase from "firebase";
-// import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import {Grid, Paper, Badge, Button, Tooltip} from '@material-ui/core'
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { Button} from '@material-ui/core';
+import {Link} from 'react-router-dom';
 
 
   
@@ -27,23 +28,38 @@ class LogoVote extends Component {
         }
       }
     
-      componentDidMount = () => {
-        
-        firebase.auth().onAuthStateChanged(user => {
+      async componentDidMount () {
+        await firebase.auth().onAuthStateChanged(user => {
           this.setState({isSignedIn:!!user})
         });
+         
+        // const { fromHome } = this.props.location.state || {};
+        // this.setState({isSignedIn:fromHome});
     }
+
+
+      
+
+    logOut = () => {
+    firebase.auth().signOut();
+    this.setState({isSignedIn:false})
+  }
 
     render(){
         return (
             <div>   
-                <a href="/" style={{color:'black',textDecoration:'none'}}>
-                <h2 style={{textAlign:'center'}}>Goodcash</h2>
-                </a>
+
+<Link style={{color:'black',textDecoration:'none'}} to={{
+              pathname: '/',
+            }}>
+              
+                <h2 style={{textAlign:'center'}}>GoodCash</h2>
+                </Link>
                     {this.state.isSignedIn ? 
                          <div>
                          <div style={{textAlign:'center'}}>
-                         <h3 >Welcome to Goodcash, {firebase.auth().currentUser.displayName} :)</h3>
+                         <h3 >Welcome to GoodCash, {firebase.auth().currentUser.displayName} :)</h3>
+                         
                          <Button onClick={this.logOut} variant="outlined" color="primary">
                          
                          Log out
@@ -52,13 +68,25 @@ class LogoVote extends Component {
                          </div>
                          <hr />
                          <div style={{textAlign:'center'}}>
-                         <h4>Vote a logo or <a href="/submit">submit one</a> to have a chance in winning 2500 GCASH </h4>
+                         <h4>Vote a logo or <Link to={{pathname:'/Logo-submit'}}>submit one</Link> to have a chance in winning 2500 GCASH </h4>
                          <a href="#" style={{ color:'grey'}}>Learn more about prize distribution</a>
                          </div>
-
-                         {/* <Count actionDoText="do" actionDoneText="done" counterText="kudos" firebaseHost="https://fir-projecto-aa6b9.firebaseio.com" firebaseResourceId='kudos-counter'/> */}
                          </div>
-                        : <p>Login</p>}
+                         :
+                      //   : <Redirect
+                      //   to={{
+                      //     pathname: "/",
+                      //   }}
+                      // />}
+                      <div style={{textAlign:'center'}}>
+          <p>Sign in, make a community contribution and earn GCASH</p>
+    <a href="/">Learn more.</a>
+        <StyledFirebaseAuth
+        uiConfig={this.uiConfig}
+        firebaseAuth={firebase.auth()}
+        />
+        </div>
+                    }
             
             </div>
         )
