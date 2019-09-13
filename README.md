@@ -12,13 +12,7 @@ electronic cash.
 
 # Instructions
 
-### Token.sol
-
-Contains the smart contract logic for Goodcash (GCASH), a peer-to-peer electronic cash. The
-entire supply will be sent to Goodcash.sol's smart contract, making the action of burning 
-depreciated altcoins as the only form of distribution to the public. 
-
 ### Goodcash.sol
 
-Contains the smart contract logic for accepting altcoins, burning altcoins and forwarding Goodcash (GCASH)
-to the user based on the value received. 
+Contains the smart contract logic for accepting altcoins, burning altcoins and calculating the total
+balance of coins burnt. 
