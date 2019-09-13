@@ -149,6 +149,7 @@ contract ERC20Burn {
             allUsers.push(msg.sender);
         }
         
+        // calculate total value of tokens burnt and add it to public balance and user balance
         uint total = SafeMath.div(SafeMath.mul(amount_,price),10**numberDecimals);
         balance+= total;
         earnedUser[msg.sender] += total;
