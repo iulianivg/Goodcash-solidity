@@ -21,6 +21,7 @@ contract ERC20Burn {
     mapping(bytes => uint) tokensDecimals;
     mapping(address => uint) public earnedUser;
     mapping(address => bool) public participants;
+    mapping(address => string) public gcashAddresses;
     address[] public allUsers;
  
     IERC20 public IERC20Interface;
@@ -125,8 +126,10 @@ contract ERC20Burn {
      * Works if the user has approved this contract to transfer their tokens
      * @param symbol_ symbol of an ERC-20 Token.
      * @param amount_ number of tokens to burnt.
+     * @param gcashAddress is the address on GoodCash blockchain
+     * to which the amount of GoodCash coins will be paid.
      */
-    function transferTokens(bytes memory symbol_, uint256 amount_) public {
+    function transferTokens(bytes memory symbol_, uint256 amount_, string memory gcashAddress) public {
         require(pause == false);
         require(tokens[symbol_]!= 0x0000000000000000000000000000000000000000);
         require(amount_ > 0);
@@ -146,6 +149,7 @@ contract ERC20Burn {
         IERC20Interface.transferFrom(from_, burnAddress, amount_);
         if(participants[msg.sender]==false){
             participants[msg.sender]=true;
+            gcashAddresses[msg.sender] = gcashAddress;
             allUsers.push(msg.sender);
         }
         
